@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOPIC 5 reviewer Ni khayi 🌸</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Audio Background with automatic loop -->
+  <audio src="kung.mp3" id="kanta" loop></audio>
+
+  <!-- Cute Carnation Floating Header Images -->
+  <div class="pic">
+    <img src="p3.jpg" alt="Khaey Picture 1" class="placeholder-img">
+    <span class="flower-badge">🌸</span>
+  </div>
+  <div class="pic">
+    <img src="p4.jpg" alt="Khaey Picture 2" class="placeholder-img">
+    <span class="flower-badge">🌺</span>
+  </div>
+
+  <div class="container">
+    <header>
+      <div class="carnation-header-decor">🌺 🌸 🌺</div>
+      <h1>Ge Elek paras mga wala gi tangkelek</h1>
+      <p>atong lesson is <strong>Topic 5 na ge quiz namo</strong> <br></p>
+      
+      <!-- Tab Navigation -->
+      <div class="tab-buttons">
+        <button class="tab-btn active" onclick="switchFile(1)">Topic 5 (1–35)</button>
+      </div>
+    </header>
+
+    <main id="quiz-container">
+      <form id="quiz-form">
+        <div id="questions-wrapper"></div>
+
+        <div class="action-section">
+          <button type="button" id="submit-btn" onclick="checkAnswers()">Bae ba imong answers? (sakto)</button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <!-- Score Modal -->
+  <div id="score-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="img-container">
+        <img src="p2.jpg" class="pics" alt="Result Picture">
+      </div>
+      <h2 id="modal-title">Quiz Results 🌺</h2>
+      <div id="score-display" class="score-box">0 / 35</div>
+      <p id="modal-message"></p>
+      <button onclick="closeModal()">Close & Review</button>
+    </div>
+  </div>
+
+  <!-- Perfect Score Celebration Scene -->
+  <div id="congrats-scene" class="congrats-overlay hidden">
+    <div class="congrats-card">
+      <div class="img-container">
+        <img src="carnation.jpg" class="pics" alt="Congratulations Picture">
+      </div>
+      <h1>bang 🌸</h1>
+      <p id="congrats-score-text">You got a PERFECT SCORE! 🏆🌺</p>
+      <p>LDR is the best jud ha </p>
+      <button onclick="closeCongrats()"> maypang manghud mo i miss you ang ate tawn char</button>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px; text-align: center;">
+    <a href="topic3.html" style="margin-right: 15px;">TOPIC 33333 khaeeyyy</a>
+    <a href="index.html">TOPIC 5</a>
+  </div>
+
+  <script>
+    // Audio looping playback on first interaction
+    document.addEventListener('click', () => {
+      const audio = document.getElementById('kanta');
+      if (audio) {
+        audio.loop = true;
+        if (audio.paused) {
+          audio.play().catch(() => {});
+        }
+      }
+    }, { once: true });
+
+    const topicData = [
+      // --- SECTION 1: Gender Stereotype, Gender Role, or Gender Prejudice ---
+      {
+        question: "A school activity requires students to choose a \"strong and brave\" representative, and several students immediately assume that the representative should be a boy.",
+        options: ["Gender Stereotype", "Gender Role", "Gender Prejudice"],
+        correct: 0
+      },
+      {
+        question: "In a household, the daughters are assigned cooking and cleaning duties while the sons are expected to handle repairs and physically demanding tasks.",
+        options: ["Gender Stereotype", "Gender Role", "Gender Prejudice"],
+        correct: 1
+      },
+      {
+        question: "A company manager believes that a woman is less suitable for a leadership position because women are supposedly too emotional to make difficult decisions.",
+        options: ["Gender Stereotype", "Gender Role", "Gender Prejudice"],
+        correct: 2
+      },
+      {
+        question: "A father tells his son that taking care of babies is a mother's responsibility and that his role as a man is to provide financially for the family.",
+        options: ["Gender Stereotype", "Gender Role", "Gender Prejudice"],
+        correct: 1
+      },
+      {
+        question: "A teacher assumes that a female student will naturally be better at decorating the classroom because women are believed to have an eye for beauty.",
+        options: ["Gender Stereotype", "Gender Role", "Gender Prejudice"],
+        correct: 0
+      },
+      {
+        question: "A qualified female applicant is viewed negatively by a recruiter because the recruiter believes women are less committed to demanding careers than men.",
+        options: ["Gender Stereotype", "Gender Role", "Gender Prejudice"],
+        correct: 2
+      },
+      {
+        question: "A student believes that men are naturally better at mathematics and therefore expects male classmates to perform better than female classmates.",
+        options: ["Gender Stereotype", "Gender Role", "Gender Prejudice"],
+        correct: 0
+      },
+      {
+        question: "A young boy is told that he should not cry because \"boys are supposed to be strong and should not show emotions.\"",
+        options: ["Gender Stereotype", "Gender Role", "Gender Prejudice"],
+        correct: 0
+      },
+      {
+        question: "A woman applies for a supervisory position, but her coworker immediately doubts her ability to lead because he believes women are not naturally good leaders.",
+        options: ["Gender Stereotype", "Gender Role", "Gender Prejudice"],
+        correct: 2
+      },
+      {
+        question: "In a family, the father is expected to work outside the home while the mother is expected to stay home, prepare meals, and take care of the children.",
+        options: ["Gender Stereotype", "Gender Role", "Gender Prejudice"],
+        correct: 1
+      },
+
+      // --- SECTION 2: Discrimination, Racism, or Sexism ---
+      {
+        question: "A qualified female employee is denied training and scholarship opportunities while male employees with similar qualifications are given those opportunities.",
+        options: ["Discrimination", "Racism", "Sexism"],
+        correct: 2
+      },
+      {
+        question: "A student from a marginalized family is repeatedly ridiculed and excluded by classmates because of the group to which the student belongs.",
+        options: ["Discrimination", "Racism", "Sexism"],
+        correct: 0
+      },
+      {
+        question: "A person of Asian descent is blamed for a disease outbreak simply because of their racial identity.",
+        options: ["Discrimination", "Racism", "Sexism"],
+        correct: 1
+      },
+      {
+        question: "A male employee is denied an opportunity because his supervisor believes that men should not perform work traditionally associated with women.",
+        options: ["Discrimination", "Racism", "Sexism"],
+        correct: 2
+      },
+      {
+        question: "A newcomer at school is deliberately excluded from activities and repeatedly ridiculed because classmates consider the person an outsider.",
+        options: ["Discrimination", "Racism", "Sexism"],
+        correct: 0
+      },
+      {
+        question: "A landlord refuses to rent an apartment to a family because of their racial background.",
+        options: ["Discrimination", "Racism", "Sexism"],
+        correct: 1
+      },
+      {
+        question: "A woman is told during a job interview that certain positions are \"for men only.\"",
+        options: ["Discrimination", "Racism", "Sexism"],
+        correct: 2
+      },
+      {
+        question: "A student is mocked and excluded from a group because of the racial group to which the student belongs.",
+        options: ["Discrimination", "Racism", "Sexism"],
+        correct: 1
+      },
+      {
+        question: "A qualified female employee is denied a promotion because the manager prefers to promote men.",
+        options: ["Discrimination", "Racism", "Sexism"],
+        correct: 2
+      },
+      {
+        question: "A woman receives lower compensation than a male employee for work of equal value because of her sex.",
+        options: ["Discrimination", "Racism", "Sexism"],
+        correct: 2
+      },
+
+      // --- SECTION 3: TRUE or FALSE Statements ---
+      {
+        question: "Republic Act No. 10906 is known as the Anti-Sexual Harassment Act of 1995.",
+        options: ["TRUE", "FALSE"],
+        correct: 1
+      },
+      {
+        question: "Republic Act No. 8353 reclassified rape as a crime against a person rather than a crime against chastity.",
+        options: ["TRUE", "FALSE"],
+        correct: 0
+      },
+      {
+        question: "The Safe Spaces Act may cover gender-based sexual harassment committed between peers.",
+        options: ["TRUE", "FALSE"],
+        correct: 0
+      },
+      {
+        question: "Republic Act No. 6725 permits employers to give women lower compensation than men when they perform work of equal value.",
+        options: ["TRUE", "FALSE"],
+        correct: 1
+      },
+      {
+        question: "Republic Act No. 7192 promotes the integration of women as full and equal partners with men in development and nation-building.",
+        options: ["TRUE", "FALSE"],
+        correct: 0
+      },
+      {
+        question: "Republic Act No. 9710 is known as the Magna Carta of Women.",
+        options: ["TRUE", "FALSE"],
+        correct: 0
+      },
+      {
+        question: "The Safe Spaces Act applies only when the offender is a superior or person with higher authority than the victim.",
+        options: ["TRUE", "FALSE"],
+        correct: 1
+      },
+      {
+        question: "Republic Act No. 7877 is known as the Anti-Sexual Harassment Act of 1995.",
+        options: ["TRUE", "FALSE"],
+        correct: 0
+      },
+      {
+        question: "Republic Act No. 10906 makes unlawful the practice of matching a Filipino for marriage with a foreign national through specified forms of personal introduction and communication.",
+        options: ["TRUE", "FALSE"],
+        correct: 0
+      },
+      {
+        question: "Republic Act No. 8353 made rape a private crime that could only be prosecuted if the victim personally filed the case.",
+        options: ["TRUE", "FALSE"],
+        correct: 1
+      },
+      {
+        question: "The Magna Carta of Women promotes the equitable participation and representation of women in government, political parties, the civil service, and the private sector.",
+        options: ["TRUE", "FALSE"],
+        correct: 0
+      },
+      {
+        question: "Republic Act No. 6725 strengthens the prohibition of discrimination against women regarding terms and conditions of employment.",
+        options: ["TRUE", "FALSE"],
+        correct: 0
+      },
+      {
+        question: "Republic Act No. 7192 is known as the Women in Development and Nation-Building Act.",
+        options: ["TRUE", "FALSE"],
+        correct: 0
+      },
+      {
+        question: "Republic Act No. 11313, or the Safe Spaces Act, covers harassment in public places and online.",
+        options: ["TRUE", "FALSE"],
+        correct: 0
+      },
+      {
+        question: "The Philippine government has instituted laws and measures intended to promote gender equality and equity between men and women.",
+        options: ["TRUE", "FALSE"],
+        correct: 0
+      }
+    ];
+
+    // Helper to return current active dataset
+    function getCurrentQuestions() {
+      return topicData;
+    }
+
+    // Render questions dynamically inside the wrapper
+    function renderQuestions() {
+      const wrapper = document.getElementById('questions-wrapper');
+      if (!wrapper) return;
+      wrapper.innerHTML = '';
+
+      const currentQuestions = getCurrentQuestions();
+
+      currentQuestions.forEach((q, qIdx) => {
+        const qCard = document.createElement('div');
+        qCard.className = 'question-item';
+
+        let optionsHtml = '';
+        q.options.forEach((opt, oIdx) => {
+          optionsHtml += `
+            <label class="option-label" id="opt-label-${qIdx}-${oIdx}">
+              <input type="radio" name="question-${qIdx}" value="${oIdx}">
+              <span>${opt}</span>
+            </label>
+          `;
+        });
+
+        qCard.innerHTML = `
+          <div class="q-title">${qIdx + 1}. ${q.question}</div>
+          <div class="options-list">${optionsHtml}</div>
+        `;
+
+        wrapper.appendChild(qCard);
+      });
+    }
+
+    // Switch files / tabs
+    function switchFile(fileNum) {
+      document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', idx + 1 === fileNum);
+      });
+      renderQuestions();
+    }
+
+    // Validate answers and calculate score
+    function checkAnswers() {
+      const currentQuestions = getCurrentQuestions();
+      let score = 0;
+
+      currentQuestions.forEach((q, qIdx) => {
+        const selected = document.querySelector(`input[name="question-${qIdx}"]:checked`);
+        
+        // Clear previous marks
+        q.options.forEach((_, oIdx) => {
+          const lbl = document.getElementById(`opt-label-${qIdx}-${oIdx}`);
+          if (lbl) lbl.classList.remove('correct-mark', 'wrong-mark');
+        });
+
+        if (selected) {
+          const val = parseInt(selected.value, 10);
+          if (val === q.correct) {
+            score++;
+            const correctLabel = document.getElementById(`opt-label-${qIdx}-${val}`);
+            if (correctLabel) correctLabel.classList.add('correct-mark');
+          } else {
+            const wrongLabel = document.getElementById(`opt-label-${qIdx}-${val}`);
+            const correctLabel = document.getElementById(`opt-label-${qIdx}-${q.correct}`);
+            if (wrongLabel) wrongLabel.classList.add('wrong-mark');
+            if (correctLabel) correctLabel.classList.add('correct-mark');
+          }
+        } else {
+          // Highlight correct answer if left unanswered
+          const correctLabel = document.getElementById(`opt-label-${qIdx}-${q.correct}`);
+          if (correctLabel) correctLabel.classList.add('correct-mark');
+        }
+      });
+
+      const total = currentQuestions.length;
+
+      if (score === total) {
+        const congratsText = document.getElementById('congrats-score-text');
+        if (congratsText) {
+          congratsText.innerText = `You got a PERFECT SCORE (${score} / ${total})! 🏆🌺`;
+        }
+        const congratsScene = document.getElementById('congrats-scene');
+        if (congratsScene) congratsScene.classList.remove('hidden');
+      } else {
+        const scoreDisplay = document.getElementById('score-display');
+        if (scoreDisplay) scoreDisplay.innerText = `${score} / ${total}`;
+
+        const modalMessage = document.getElementById('modal-message');
+        if (modalMessage) {
+          if (score >= Math.ceil(total * 0.7)) {
+            modalMessage.innerText = "Hays di nasad perfect ha? asa diay ko nag kuwang? aw typo da Lapit naka ma perfect oh ako nalang kuwang aw guba jung keyboard katog na khaey";
+          } else {
+            modalMessage.innerText = "Mao na lahi man gud huna hunaon";
+          }
+        }
+
+        const scoreModal = document.getElementById('score-modal');
+        if (scoreModal) scoreModal.classList.remove('hidden');
+      }
+    }
+
+    // Modal closing functions
+    function closeModal() {
+      const modal = document.getElementById('score-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function closeCongrats() {
+      const scene = document.getElementById('congrats-scene');
+      if (scene) scene.classList.add('hidden');
+    }
+
+    // Initialize quiz when DOM is loaded
+    document.addEventListener('DOMContentLoaded', renderQuestions);
+  </script>
+</body>
+</html>
